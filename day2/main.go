@@ -110,8 +110,9 @@ func getMatches(input string) [][]string {
 
 	// Split each set into a slice of strings
 	for i, set := range sets {
-		matches[i] = make([]string, len(set))
-		matches[i] = strings.Split(set, " ")
+		match := strings.Split(set, " ")
+		matches[i] = make([]string, len(match))
+		matches[i] = match
 	}
 
 	return matches

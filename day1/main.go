@@ -56,8 +56,9 @@ func getCaloryGroups(input string) [][]int {
 
 	// Split each set into a slice of strings
 	for i, set := range sets {
-		groups[i] = make([]string, len(set))
-		groups[i] = strings.Split(set, "\n")
+		group := strings.Split(set, "\n")
+		groups[i] = make([]string, len(group))
+		groups[i] = group
 	}
 
 	// Convert the strings in each set to integers
