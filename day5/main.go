@@ -97,14 +97,11 @@ func getMoves(mvStr string) [][]int {
 
 	for i, set := range sets {
 		moves[i] = make([]int, 3)
-		mvs := strings.Split(set, " ")
-		qnt, err := strconv.Atoi(mvs[QNT_INP])
-		checkErr(err)
-		from, err := strconv.Atoi(mvs[FROM_INP])
-		checkErr(err)
-		to, err := strconv.Atoi(mvs[TO_INP])
-		checkErr(err)
+		var qnt, from, to int
+		moves[i] = make([]int, 3)
+		fmt.Sscanf(set, "move %d from %d to %d", &qnt, &from, &to)
 		moves[i] = []int{qnt, from, to}
+
 	}
 	return moves
 }
