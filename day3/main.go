@@ -15,43 +15,7 @@ func main() {
 	fmt.Println(getGroupPrioritySum("input.txt"))
 }
 
-// Second part
-func getGroupPrioritySum(fileName string) int {
-	groups := getInput(fileName, getElvesGroups)
-	sum := 0
-
-	for _, group := range groups {
-		sum += getGroupPriority(group)
-	}
-
-	return sum
-}
-
-func getGroupPriority(group []string) int {
-	priority := 0
-	for l := range group[0] {
-		if strings.Contains(group[1], string(group[0][l])) && strings.Contains(group[2], string(group[0][l])) {
-			return getPriorityValue(int(group[0][l]))
-		}
-	}
-	return priority
-}
-
-func getElvesGroups(input string) [][]string {
-	sets := strings.Split(input, "\n")
-	groups := make([][]string, len(sets)/3)
-
-	j := 0
-	for i := 0; i <= len(sets)-3; i += 3 {
-		groups[j] = make([]string, 3)
-		groups[j] = []string{sets[i], sets[i+1], sets[i+2]}
-		j++
-	}
-
-	return groups
-}
-
-// First part
+// Part 1
 func getPrioritySum(fileName string) int {
 	comparts := getInput(fileName, getCompartments)
 	sum := 0
@@ -85,6 +49,42 @@ func getCompartments(input string) [][]string {
 	}
 
 	return comparts
+}
+
+// Part 2
+func getGroupPrioritySum(fileName string) int {
+	groups := getInput(fileName, getElvesGroups)
+	sum := 0
+
+	for _, group := range groups {
+		sum += getGroupPriority(group)
+	}
+
+	return sum
+}
+
+func getGroupPriority(group []string) int {
+	priority := 0
+	for l := range group[0] {
+		if strings.Contains(group[1], string(group[0][l])) && strings.Contains(group[2], string(group[0][l])) {
+			return getPriorityValue(int(group[0][l]))
+		}
+	}
+	return priority
+}
+
+func getElvesGroups(input string) [][]string {
+	sets := strings.Split(input, "\n")
+	groups := make([][]string, len(sets)/3)
+
+	j := 0
+	for i := 0; i <= len(sets)-3; i += 3 {
+		groups[j] = make([]string, 3)
+		groups[j] = []string{sets[i], sets[i+1], sets[i+2]}
+		j++
+	}
+
+	return groups
 }
 
 // Utils

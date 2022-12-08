@@ -15,6 +15,7 @@ func main() {
 	fmt.Println("First message starts after index", firstMessage)
 }
 
+// Part 1
 func findStartPacket(seq string) int {
 	i := 0
 	for i < len(seq)-4 {
@@ -30,6 +31,7 @@ func findStartPacket(seq string) int {
 	return -1
 }
 
+// Part 2
 func findStartMessage(seq string) int {
 	i := 0
 	for i < len(seq)-14 {
@@ -45,6 +47,7 @@ func findStartMessage(seq string) int {
 	return -1
 }
 
+// Utils
 func findEqualMarker(s string) int {
 	counts := make(map[rune][]int)
 	for i, r := range s {

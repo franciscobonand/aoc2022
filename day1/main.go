@@ -12,12 +12,12 @@ import (
 
 func main() {
 	maxCal := getMostCalories("input.txt")
-	fmt.Println("Top calorie count:")
-	fmt.Println(maxCal)
-	fmt.Println("Top 3 calorie counts:")
-	fmt.Println(getTopThreeCalories("input.txt"))
+	fmt.Println("Top calorie count:", maxCal)
+	top3Cal := getTopThreeCalories("input.txt")
+	fmt.Println("Top 3 calorie counts:", top3Cal)
 }
 
+// Part 1
 func getMostCalories(file string) int {
 	caloryGroups := getInput(file)
 	calSum := getOrderedCalorySumByGroup(caloryGroups)
@@ -25,6 +25,7 @@ func getMostCalories(file string) int {
 	return calSum[0]
 }
 
+// Part 2
 func getTopThreeCalories(file string) int {
 	caloryGroups := getInput(file)
 	calSum := getOrderedCalorySumByGroup(caloryGroups)
@@ -32,6 +33,7 @@ func getTopThreeCalories(file string) int {
 	return calSum[0] + calSum[1] + calSum[2]
 }
 
+// Utils
 func getInput(fileName string) [][]int {
 	file, err := os.Open(fileName)
 	if err != nil {

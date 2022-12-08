@@ -16,7 +16,21 @@ func main() {
 	fmt.Println(getAnyOverlap("input.txt"))
 }
 
-// Second part
+// Part 1
+func getFullOverlap(fileName string) int {
+	pairs := getInput(fileName, getPairs)
+	overlap := 0
+
+	for _, pair := range pairs {
+		if isFullyOverlaped(pair) {
+			overlap++
+		}
+	}
+
+	return overlap
+}
+
+// Part 2
 func getAnyOverlap(fileName string) int {
 	pairs := getInput(fileName, getPairs)
 	overlap := 0
@@ -25,20 +39,6 @@ func getAnyOverlap(fileName string) int {
 		if (pair[1] >= pair[2] && pair[1] <= pair[3]) ||
 			(pair[0] >= pair[2] && pair[0] <= pair[3]) ||
 			isFullyOverlaped(pair) {
-			overlap++
-		}
-	}
-
-	return overlap
-}
-
-// First part
-func getFullOverlap(fileName string) int {
-	pairs := getInput(fileName, getPairs)
-	overlap := 0
-
-	for _, pair := range pairs {
-		if isFullyOverlaped(pair) {
 			overlap++
 		}
 	}

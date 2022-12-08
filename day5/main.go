@@ -26,28 +26,7 @@ func main() {
 	printTopItems(stackMulti)
 }
 
-func printTopItems(stk []Stack) {
-	for _, s := range stk {
-		fmt.Printf("%s ", s.Pop())
-	}
-	fmt.Println()
-}
-
-func rearrangeStacksMultiple(fileName string) []Stack {
-	stk, mv := getInput(fileName, getStacksAndMoves)
-	for _, m := range mv {
-		qnt, from, to := m[QNT], m[FROM]-1, m[TO]-1
-		if qnt == 0 {
-			continue
-		}
-		items := stk[from].PopGivenQuantity(qnt)
-		for _, item := range items {
-			stk[to].Push(item)
-		}
-	}
-	return stk
-}
-
+// Part 1
 func rearrangeStacks(fileName string) []Stack {
 	stk, mv := getInput(fileName, getStacksAndMoves)
 	for _, m := range mv {
@@ -63,6 +42,23 @@ func rearrangeStacks(fileName string) []Stack {
 	return stk
 }
 
+// Part 2
+func rearrangeStacksMultiple(fileName string) []Stack {
+	stk, mv := getInput(fileName, getStacksAndMoves)
+	for _, m := range mv {
+		qnt, from, to := m[QNT], m[FROM]-1, m[TO]-1
+		if qnt == 0 {
+			continue
+		}
+		items := stk[from].PopGivenQuantity(qnt)
+		for _, item := range items {
+			stk[to].Push(item)
+		}
+	}
+	return stk
+}
+
+// Utils
 func getInput(fileName string, f func(string) ([]Stack, [][]int)) ([]Stack, [][]int) {
 	file, err := os.Open(fileName)
 	if err != nil {
@@ -127,6 +123,13 @@ func getStacks(stk string) []Stack {
 	}
 
 	return stacks
+}
+
+func printTopItems(stk []Stack) {
+	for _, s := range stk {
+		fmt.Printf("%s ", s.Pop())
+	}
+	fmt.Println()
 }
 
 func checkErr(err error) {

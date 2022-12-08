@@ -60,6 +60,7 @@ func main() {
 	fmt.Println(totalMatchScore)
 }
 
+// Part 1
 func getTotalOutcomeScore(fileName string) int {
 	input := getInput(fileName)
 	totalScore := 0
@@ -73,6 +74,7 @@ func getTotalOutcomeScore(fileName string) int {
 	return totalScore
 }
 
+// Part 2
 func getTotalMatchScore(fileName string) int {
 	input := getInput(fileName)
 	totalScore := 0
@@ -87,6 +89,7 @@ func getTotalMatchScore(fileName string) int {
 
 }
 
+// Utils
 func getInput(fileName string) [][]string {
 	file, err := os.Open(fileName)
 	if err != nil {
