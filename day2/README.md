@@ -29,7 +29,7 @@ In this example, if you were to follow the strategy guide, you would get a total
 
 What would your total score be if everything goes exactly according to your strategy guide?
 
-R:`12586`
+R:`12586` - Golang
 
 ## --- Part Two ---
 
@@ -44,4 +44,4 @@ Now that you're correctly decrypting the ultra top secret strategy guide, you wo
 
 Following the Elf's instructions for the second column, what would your total score be if everything goes exactly according to your strategy guide?
 
-R: `13193`
+R: `13193` - Golang

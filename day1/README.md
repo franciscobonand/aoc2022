@@ -40,7 +40,7 @@ In case the Elves get hungry and need extra snacks, they need to know which Elf 
 
 Find the Elf carrying the most Calories. How many total Calories is that Elf carrying?
 
-R: `69795`
+R: `69795` - Golang
 
 ## --- Part Two ---
 
@@ -52,4 +52,4 @@ In the example above, the top three Elves are the fourth Elf (with 24000 Calorie
 
 Find the top three Elves carrying the most Calories. How many Calories are those Elves carrying in total?
 
-R: `208437`
+R: `208437` - Golang

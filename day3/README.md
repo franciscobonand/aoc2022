@@ -35,7 +35,7 @@ In the above example, the priority of the item type that appears in both compart
 
 Find the item type that appears in both compartments of each rucksack. What is the sum of the priorities of those item types?
 
-R: `8072`
+R: `8072` - Golang
 
 ## --- Part Two ---
 
@@ -69,4 +69,4 @@ Priorities for these items must still be found to organize the sticker attachmen
 
 Find the item type that corresponds to the badges of each three-Elf group. What is the sum of the priorities of those item types?
 
-R: `2567`
+R: `2567` - Golang

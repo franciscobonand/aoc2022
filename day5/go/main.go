@@ -10,12 +10,9 @@ import (
 )
 
 const (
-	QNT_INP  = 1
-	FROM_INP = 3
-	TO_INP   = 5
-	QNT      = 0
-	FROM     = 1
-	TO       = 2
+	QNT  = 0
+	FROM = 1
+	TO   = 2
 )
 
 func main() {

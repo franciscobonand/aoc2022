@@ -46,7 +46,7 @@ Some of the pairs have noticed that one of their assignments fully contains the 
 
 In how many assignment pairs does one range fully contain the other?
 
-R: `584`
+R: `584` - Golang
 
 ## --- Part Two ---
 
@@ -63,4 +63,4 @@ So, in this example, the number of overlapping assignment pairs is 4.
 
 In how many assignment pairs do the ranges overlap?
 
-R: `933`
+R: `933` - Golang
