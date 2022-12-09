@@ -4,9 +4,9 @@ bool _isLastLine(int lineCounter, int linesLength) =>
     lineCounter == linesLength - 1;
 
 Future<void> main(List<String> args) async {
-  int auxCalories = 0;
+  int currentCalorie = 0;
 
-  List<int> somasCalorias = [];
+  List<int> sumOfCalories = [];
   File file = new File('input.txt');
 
   List<String> lines = file.readAsLinesSync();
@@ -15,19 +15,19 @@ Future<void> main(List<String> args) async {
     final line = lines[lineCounter];
 
     if (line.isEmpty) {
-      somasCalorias.add(auxCalories);
-      auxCalories = 0;
+      sumOfCalories.add(currentCalorie);
+      currentCalorie = 0;
     } else {
-      auxCalories += int.parse(line);
+      currentCalorie += int.parse(line);
       if (_isLastLine(lineCounter, lines.length)) {
-        somasCalorias.add(auxCalories);
+        sumOfCalories.add(currentCalorie);
       }
     }
   }
 
-  somasCalorias.sort((a, b) => b.compareTo(a));
+  sumOfCalories.sort((a, b) => b.compareTo(a));
 
-  print('Parte 1 - Mais calorias: ${somasCalorias[0]}');
+  print('Parte 1 - Mais calorias: ${sumOfCalories[0]}');
   print(
-      'Parte 2 - São ${somasCalorias[0] + somasCalorias[1] + somasCalorias[2]} calorias');
+      'Parte 2 - São ${sumOfCalories[0] + sumOfCalories[1] + sumOfCalories[2]} calorias');
 }
