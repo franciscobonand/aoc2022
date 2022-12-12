@@ -20,21 +20,21 @@ func main() {
 // Part 1
 func getMostCalories(file string) int {
 	caloryGroups := getInput(file)
-	calSum := getOrderedCalorySumByGroup(caloryGroups)
+	groups := getOrderedCalorySumByGroup(caloryGroups)
 
-	return calSum[0]
+	return groups[0]
 }
 
 // Part 2
 func getTopThreeCalories(file string) int {
 	caloryGroups := getInput(file)
-	calSum := getOrderedCalorySumByGroup(caloryGroups)
+	groups := getOrderedCalorySumByGroup(caloryGroups)
 
-	return calSum[0] + calSum[1] + calSum[2]
+	return groups[0] + groups[1] + groups[2]
 }
 
 // Utils
-func getInput(fileName string) [][]int {
+func getInput(fileName string) []int {
 	file, err := os.Open(fileName)
 	if err != nil {
 		panic("Error opening file")
@@ -51,10 +51,9 @@ func getInput(fileName string) [][]int {
 	return getCaloryGroups(content)
 }
 
-func getCaloryGroups(input string) [][]int {
+func getCaloryGroups(input string) []int {
 	sets := strings.Split(input, "\n\n")
 	groups := make([][]string, len(sets))
-	intGroups := make([][]int, len(sets))
 
 	// Split each set into a slice of strings
 	for i, set := range sets {
@@ -64,15 +63,16 @@ func getCaloryGroups(input string) [][]int {
 	}
 
 	// Convert the strings in each set to integers
+	intGroups := make([]int, len(groups))
 	for i, set := range groups {
-		intGroups[i] = make([]int, len(set))
-		for j, number := range set {
+		intGroups[i] = 0
+		for _, number := range set {
 			num, err := strconv.Atoi(number)
 			if err != nil {
 				panic("Error converting string to int")
 			}
 
-			intGroups[i][j] = num
+			intGroups[i] += num
 		}
 	}
 
@@ -81,18 +81,10 @@ func getCaloryGroups(input string) [][]int {
 
 // getOrderedCalorySumByGroup returns a slice of integers containing the sum of
 // each group's calories, sorted in descending order.
-func getOrderedCalorySumByGroup(groups [][]int) []int {
-	calSum := make([]int, len(groups))
-
-	for i, group := range groups {
-		for _, cal := range group {
-			calSum[i] += cal
-		}
-	}
-
-	sort.Slice(calSum, func(i, j int) bool {
-		return calSum[i] > calSum[j]
+func getOrderedCalorySumByGroup(groups []int) []int {
+	sort.Slice(groups, func(i, j int) bool {
+		return groups[i] > groups[j]
 	})
 
-	return calSum
+	return groups
 }
