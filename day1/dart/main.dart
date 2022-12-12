@@ -3,7 +3,7 @@ import 'dart:io';
 bool _isLastLine(int lineCounter, int linesLength) =>
     lineCounter == linesLength - 1;
 
-Future<void> main(List<String> args) async {
+void main(List<String> args) {
   int currentCalorie = 0;
 
   List<int> sumOfCalories = [];

@@ -54,14 +54,20 @@ Future<void> main(List<String> args) async {
 
   List<String> lines = file.readAsLinesSync();
 
-  for (int lineCounter = 0; lineCounter < lines.length; lineCounter++) {
-    final line = lines[lineCounter];
-    List<String> moves = line.split(' ');
+  sumOfScoresPart1 = lines.map((e) {
+    List<String> moves = e.split(' ');
     final opponentMove = moves[0];
     final yourMove = moves[1];
-    sumOfScoresPart1 += answerSheetPart1[opponentMove]![yourMove]!;
-    sumOfScoresPart2 += answerSheetPart2[opponentMove]![yourMove]!;
-  }
+    return answerSheetPart1[opponentMove]![yourMove]!;
+  }).reduce((value, element) => value + element);
+
+  sumOfScoresPart2 = lines.map((e) {
+    List<String> moves = e.split(' ');
+    final opponentMove = moves[0];
+    final yourMove = moves[1];
+    return answerSheetPart2[opponentMove]![yourMove]!;
+  }).reduce((value, element) => value + element);
+
   print('Parte 1: ${sumOfScoresPart1}');
   print('Parte 2: ${sumOfScoresPart2}');
 }
