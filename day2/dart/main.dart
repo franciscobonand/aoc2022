@@ -47,7 +47,7 @@ const answerSheetPart2 = {
   },
 };
 
-Future<void> main(List<String> args) async {
+void main(List<String> args) {
   File file = new File('input.txt');
   int sumOfScoresPart1 = 0;
   int sumOfScoresPart2 = 0;
