@@ -8,25 +8,44 @@ import (
 	"strings"
 )
 
+const (
+	sizeToDelete = 5174025
+	maxDirSize   = 100000
+)
+
 func main() {
 	input := getInput("input.txt")
 	home := createFilesystem(input)
 	var totalSize int
-	dfs(home, &totalSize, "")
-	fmt.Println(totalSize)
+	getTotalSize(home, &totalSize)
+	fmt.Println("Total directory size sum:", totalSize)
+	dirToDeleteSize := home.Size
+	getDirToDelete(home, &dirToDeleteSize)
+	fmt.Println("Size of directory to be deleted:", dirToDeleteSize)
+
 }
 
-func dfs(dir *directory, totalSize *int, ann string) int {
+// Part 1
+func getTotalSize(dir *directory, totalSize *int) int {
 	for _, subDir := range dir.SubDirectories {
-		dir.Size += dfs(subDir, totalSize, ann)
+		dir.Size += getTotalSize(subDir, totalSize)
 	}
 	dir.Size += sumFileSizes(dir.Files)
-	if dir.Size <= 100000 {
+	if dir.Size <= maxDirSize {
 		*totalSize += dir.Size
 	}
-	// ann += "-"
-	// fmt.Printf("%s%s (%d)\n", ann, dir.Path, dir.Size)
 	return dir.Size
+}
+
+// Part 2
+func getDirToDelete(dir *directory, dirToDeleteSize *int) {
+	size := dir.Size
+	if size >= sizeToDelete && size < *dirToDeleteSize {
+		*dirToDeleteSize = size
+	}
+	for _, subDir := range dir.SubDirectories {
+		getDirToDelete(subDir, dirToDeleteSize)
+	}
 }
 
 func sumFileSizes(files []file) int {
