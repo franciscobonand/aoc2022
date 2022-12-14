@@ -80,7 +80,7 @@ class Tree {
 }
 
 void main(List<String> args) {
-  File file = new File('input.txt');
+  File file = new File('C:/Users/thiag/Desktop/aoc2022/day8/dart/input.txt');
 
   List<String> lines = file.readAsLinesSync();
 
