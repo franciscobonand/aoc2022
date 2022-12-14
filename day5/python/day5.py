@@ -1,44 +1,55 @@
 import re
+import numpy as np
 
-filePath = r"E:\desktop\day5.txt"
+filePath = r"day5.txt"
 
 with open(filePath, "r") as f:
-    temp = f.read().splitlines()
+    stack, moves = f.read().split('\n\n')
 
-# print(temp)
-
-
-def find_top_crate(stacks, moves):
-    top_crates = {}
-
-    for move in moves:
-# split the move string into the number of crates and the source and destination stacks
-        
-        num_crates, from_stack, to_stack = re.findall(r'\d', move)
-        print(num_crates, from_stack, to_stack)
-        # convert the number of crates and source and destination stacks to integers
-        num_crates = int(num_crates)
-        from_stack = int(from_stack)
-        to_stack = int(to_stack)
-
-        # store the top crates of the source and destination stacks in variables
-        from_crate = stacks[from_stack][-num_crates:]
-        to_crate = stacks[to_stack][-1]
-
-        # remove the crates from the source stack
-        stacks[from_stack] = stacks[from_stack][:-num_crates]
-
-        # add the crates to the destination stack
-        stacks[to_stack].extend(from_crate)
-
-        # store the top crate of each stack in the top_crates dictionary
-        top_crates[from_stack] = stacks[from_stack][-1]
-        top_crates[to_stack] = stacks[to_stack][-1]
-
-    top_crates_list = [top_crates[i] for i in range(1, len(stacks)+1)]
+def stack_toMatrix(stack_string):
+    stack_string = re.sub(r" {4}", " ", stack_string) # remove extra spaces
     
-    return top_crates_list
+    stack_matrix = stack_string.split('\n')[:-1]      # split lines
+    stack_matrix = [row.split(' ') for row in stack_matrix] # split spaces creating a matrix
+    transposed = np.transpose(stack_matrix)                 # transpose so we get list of stacks
+    return [list(filter(None, i)) for i in transposed]      # leave only crates in the stack (remove empty slots)
 
-stacks = [["Z", "N"], ["M", "C", "D"], ["P"]]
-moves = ["move 1 from 2 to 1", "move 3 from 1 to 3", "move 2 from 2 to 1", "move 1 from 1 to 2"]
-print(find_top_crate(stacks, moves)) # ["C", "M", "Z"]
+def do_move(moves, stack):
+    moves = moves.split('\n')
+    
+    moves_list =  [re.findall(r"\d+", move) for move in moves]
+    for move in moves_list:
+        qtd, from_stack, to_stack = int(move[0]), int(move[1]), int(move[2])
+        to_move = stack[from_stack-1][:qtd]
+        stack[from_stack-1] = stack[from_stack-1][qtd:] # remove items from original stack
+        for m in to_move:   # insert items into target stack
+            stack[to_stack-1].insert(0,m)
+        
+    for i in stack:
+        print(re.sub(r"[\[\]]","",i[0]),end="")
+
+
+stack_matrix = stack_toMatrix(stack)
+do_move(moves, stack_matrix)
+print()
+
+
+#### Part two ####
+
+def do_move(moves, stack):
+    moves = moves.split('\n')
+    
+    moves_list =  [re.findall(r"\d+", move) for move in moves]
+    for move in moves_list:
+
+        qtd, from_stack, to_stack = int(move[0]), int(move[1]), int(move[2])
+        to_move = stack[from_stack-1][:qtd]
+        stack[from_stack-1] = stack[from_stack-1][qtd:] # remove items from original stack
+        for m in to_move[::-1]:   # insert items into target stack
+            stack[to_stack-1].insert(0,m)
+        
+    for i in stack:
+        print(re.sub(r"[\[\]]","",i[0]),end="")
+
+stack_matrix = stack_toMatrix(stack)
+do_move(moves, stack_matrix)
