@@ -6,7 +6,6 @@ Monkey 0:
     If false: throw to monkey 3
 
 Monkey 1:
-  438371237432765
   Starting items: 54, 65, 75, 74
   Operation: new = old + 6
   Test: divisible by 19
